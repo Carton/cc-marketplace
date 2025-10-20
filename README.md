@@ -1,6 +1,6 @@
 # Claude Code Plugin Marketplace
 
-Minimal Claude Code plugin marketplace focused on modern Python development.
+Minimal Claude Code plugin marketplace focused on minimal software development.
 
 ## Installation
 
