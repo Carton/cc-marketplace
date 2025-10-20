@@ -1,0 +1,23 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "cc-marketplace",
+  "version": "1.0.0",
+  "description": "Minimal Claude Code plugin marketplace",
+  "owner": {
+    "name": "Tasanakorn Phaipool",
+    "email": "tasanakorn@gmail.com"
+  },
+  "plugins": [
+    {
+      "name": "python-dev",
+      "description": "Modern Python development with uv, PEP8, type hints, and project setup automation",
+      "version": "1.0.0",
+      "author": {
+        "name": "Tasanakorn Phaipool",
+        "email": "tasanakorn@gmail.com"
+      },
+      "source": "./plugins/python-dev",
+      "category": "development"
+    }
+  ]
+}

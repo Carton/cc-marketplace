@@ -1,0 +1,9 @@
+{
+  "name": "python-dev",
+  "description": "Modern Python development assistant with uv tooling, PEP8 standards, and project setup automation",
+  "version": "1.0.0",
+  "author": {
+    "name": "Tasanakorn Phaipool",
+    "email": "tasanakorn@gmail.com"
+  }
+}
