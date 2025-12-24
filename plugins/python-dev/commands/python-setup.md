@@ -283,9 +283,6 @@ env/
 .coverage
 htmlcov/
 
-# uv
-uv.lock
-
 # OS
 .DS_Store
 Thumbs.db
