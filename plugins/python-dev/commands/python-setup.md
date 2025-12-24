@@ -83,11 +83,12 @@ Create minimal pyproject.toml with:
 - requires-python = ">=X.Y" (from detected Python version)
 - dependencies (only if CLI/TUI libraries selected, otherwise empty)
 
-### [project.optional-dependencies]:
+### [dependency-groups] section:
 ```toml
 dev = [
-    "ruff>=0.1.0",
+    "ruff>=0.7.0",
     "mypy>=1.8.0",
+    "poethepoet>=0.24.0",
 ]
 # Note: No pytest - user can add later if needed
 ```
@@ -109,17 +110,46 @@ build-backend = "hatchling.build"
 ```toml
 [tool.ruff]
 line-length = 88
-target-version = "py311"
-select = ["E", "F", "I", "N", "W", "UP"]
+target-version = "py312"
 ```
+And add proper default select rules for ruff.
 
 ### [tool.mypy]:
 ```toml
 [tool.mypy]
-python_version = "3.11"
+python_version = "3.12"
 strict = true
 warn_return_any = true
 warn_unused_configs = true
+```
+
+### [tool.poe.tasks]:
+```toml
+[tool.poe.tasks]
+# Test tasks
+test = "python -m pytest"
+test-coverage = "python -m pytest --cov=src --cov-report=html --cov-report=term"
+
+# Build tasks
+build = "python scripts/build.py"
+
+# Direct tool access
+pytest = "pytest"
+ruff-check = "ruff check src/ tests/ scripts/ tools/"
+ruff-check-fix = "ruff check src/ tests/ scripts/ tools/ --fix"
+ruff-isort = "ruff check src/ tests/ scripts/ tools/ --select I"
+ruff-isort-fix = "ruff check src/ tests/ scripts/ tools/ --select I --fix"
+ruff-format = "ruff format src/ tests/ scripts/ tools/"
+ruff-format-check = "ruff format src/ tests/ scripts/ tools/ --check"
+mypy = "mypy src/"
+
+# Default actions
+check = ["ruff-format-check", "ruff-isort"]
+fix = ["ruff-format", "ruff-isort-fix"]
+
+# Full actions
+check-full = ["ruff-format-check", "ruff-check", "mypy"]
+fix-full = ["ruff-format", "ruff-check-fix", "mypy"]
 ```
 
 ## Step 7: Create Entry Point
@@ -283,6 +313,7 @@ Display a minimal summary:
 **Development:**
 - ruff (linting)
 - mypy (type checking)
+- poe (task runner)
 
 ### Next Steps
 
@@ -299,10 +330,11 @@ Display a minimal summary:
    uv run package-name
    ```
 
-3. **Lint code:**
+3. **Lint and Check Code:**
    ```bash
-   uv run ruff check .
-   uv run mypy src
+   uv run poe check-full
+   # or automatically fix issues
+   uv run poe fix-full
    ```
 
 4. **Add dependencies when needed:**
@@ -318,8 +350,9 @@ Display a minimal summary:
 | Add dependency | `uv add package-name` |
 | Add dev dependency | `uv add --dev package-name` |
 | Run script | `uv run python script.py` |
-| Lint code | `uv run ruff check .` |
-| Type check | `uv run mypy src` |
+| Full Check | `uv run poe check-full` |
+| Full Fix | `uv run poe fix-full` |
+| Run Tests | `uv run poe test` |
 
 ### To Add Later (Optional)
 
