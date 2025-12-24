@@ -59,15 +59,14 @@ If not installed, provide installation instructions:
 │   └── package_name/
 │       ├── __init__.py          # Package initialization
 │       └── __main__.py          # Entry point
+├── tests/                       # Tests directory
 ├── pyproject.toml               # Minimal configuration
 ├── README.md                    # Documentation
 └── .gitignore                   # Git ignore patterns
 ```
 
 **DO NOT create:**
-- ❌ tests/ directory
 - ❌ py.typed file
-- ❌ .python-version file
 - ❌ New project directory
 
 ## Step 6: Generate Minimal pyproject.toml
@@ -135,12 +134,12 @@ build = "python scripts/build.py"
 
 # Direct tool access
 pytest = "pytest"
-ruff-check = "ruff check src/ tests/ scripts/ tools/"
-ruff-check-fix = "ruff check src/ tests/ scripts/ tools/ --fix"
-ruff-isort = "ruff check src/ tests/ scripts/ tools/ --select I"
-ruff-isort-fix = "ruff check src/ tests/ scripts/ tools/ --select I --fix"
-ruff-format = "ruff format src/ tests/ scripts/ tools/"
-ruff-format-check = "ruff format src/ tests/ scripts/ tools/ --check"
+ruff-check = "ruff check src/ tests/"
+ruff-check-fix = "ruff check src/ tests/ --fix"
+ruff-isort = "ruff check src/ tests/ --select I"
+ruff-isort-fix = "ruff check src/ tests/ --select I --fix"
+ruff-format = "ruff format src/ tests/"
+ruff-format-check = "ruff format src/ tests/ --check"
 mypy = "mypy src/"
 
 # Default actions
